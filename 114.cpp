@@ -9,7 +9,7 @@
  */
  //我误解题意了，以为只是从小到大展开。然后我用dfs深度优先算法将每个结点的指针保存到vector<TreeNode ×*>
  //里，再用stl里的sort对vector排序，再将树变成上图形式
-class Solution {
+/*class Solution {
 public:
     void flatten(TreeNode* root) {
         if (root == nullptr) {
@@ -44,4 +44,34 @@ private:
     static bool compare(TreeNode *lhs, TreeNode *rhs) {
         return lhs->val <  rhs->val;
     }
-}; 
+}; */
+//我的正确办法
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        if (root == nullptr) {
+            return;
+        }
+        vector<TreeNode *> result;
+        preTraversal(root, result);
+        
+        auto it1 = result.begin();
+        auto it2 = result.begin() + 1;
+        for (; it2 != result.end(); ++it1, ++it2) {
+            (*it1)->left = nullptr;
+            (*it1)->right = *it2;
+        }
+        (*it1)->left = nullptr;
+        (*it1)->right = nullptr;
+    }
+private:
+        void preTraversal(TreeNode *root, vector<TreeNode *> &result) {
+        if (root == nullptr) {
+            return;
+        }
+        result.push_back(root);
+        preTraversal(root->left, result);
+        preTraversal(root->right, result);
+        return;
+    }
+};
