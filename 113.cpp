@@ -10,6 +10,7 @@
  //dfs+典型的回溯问题
  //参考112
  //每个结点依次push_back()进vector<int>，又依次pop_back,只有当出现满足条件的路径时才push_back到vector<vector<int>>里
+ //这是用了前序遍历
 class Solution {
 public:
     vector<vector<int>> pathSum(TreeNode* root, int sum) {
