@@ -35,7 +35,7 @@ public:
         
     }
 private:
-    void helper(TreeNode *root, vector<vector<int>> &ret_vec, vector<int> ele) {
+    void helper(TreeNode *root, vector<vector<int>> &ret_vec, vector<int> &ele) {//ele可以不用引用，但引用省时间
         if (!root) {
             return;
         }

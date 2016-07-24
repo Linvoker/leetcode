@@ -20,7 +20,7 @@ public:
         return ret_vec;
     }
 private:
-    void findPath(TreeNode *root, int sum, vector<vector<int>> &result, vector<int> &temp) {
+    void findPath(TreeNode *root, int sum, vector<vector<int>> &result, vector<int> &temp) {//temp可以不用引用，但引用省时间
         if (root == nullptr) {
             return;
         } 
