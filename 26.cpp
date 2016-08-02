@@ -37,9 +37,10 @@ public:
         return nums.size() - count;
     }
 };*/
-//别人想的 最好的办法，使用O(n)时间复杂度
+//别人想的办法，使用O(n)时间复杂度
 //不是把duplicate放在后面，而是慢慢把它们覆盖掉
-class Solution {
+//利用计数
+/*class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
         if (nums.empty()) {
@@ -51,5 +52,20 @@ public:
                 else nums[i-count] = nums[i];//覆盖掉原本的数组
             }
         return nums.size()-count;
+    }
+};*/
+//这类问题最标准的办法，不用计数
+//i用来指向正要改变的位置
+//v表示遍历到的位置
+class Solution {
+public:
+    int removeDuplicates(vector<int> &nums) {
+        int i = 0;
+        for (auto v : nums) {
+            if (i < 1 || v > nums[i - 1]) {//要想让i前移，必须满足当前v的值大于i-1位置的值并把v赋值给i这个位置
+                nums[i++] = v;
+            }
+        }
+        return i;
     }
 };
