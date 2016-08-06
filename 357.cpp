@@ -50,8 +50,6 @@ public:
     int factorial(int num, int count) {//阶乘
         if (count == 0) {
             return 1;
-        } else if (count == 1) {
-            return num;
         } else {
             return num * factorial(num - 1, --count);
         }
