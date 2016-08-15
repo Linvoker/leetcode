@@ -21,7 +21,7 @@ public:
         q_t.push(root);
         vector<vector<int>> ret_vec;
         vector<int> temp;
-        int count = 1;//初始化为1是因为root已入队
+        int count = 1;//记录当前层的元素个数,初始化为1是因为root已入队
         while (!q_t.empty()) {
             if (q_t.front()->left != nullptr) {
                 q_t.push(q_t.front()->left);
@@ -31,7 +31,7 @@ public:
             }
             temp.push_back(q_t.front()->val);
             q_t.pop();
-            if (--count == 0) {
+            if (--count == 0) {//当前层已全部出队了
                 ret_vec.push_back(temp);
                 temp.clear();
                 count = q_t.size();
@@ -64,3 +64,5 @@ public:
 }
     
 };
+
+
