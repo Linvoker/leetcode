@@ -19,9 +19,9 @@ public:
             if (dict[s[j]] > 0) {
                 while (s[i] != s[j]) {
                     dict[s[i++]] = 0;
-                    cnt--;
+                    cnt--; //这里画个图就能理解
                 }
-                i++;
+                i++; //这里画个图就能理解
             } else {
                 //不在dict里则更新最大值继续
                 dict[s[j]] = 1;
