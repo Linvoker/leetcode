@@ -54,7 +54,7 @@ public:
             }
             int left_index = i + 1;
             int right_index = max_index;
-            while (left_index < right_index) {
+            while (left_index < right_index) { //用两端指针逼近即可
                 
                 if (nums[left_index] + nums[right_index] < target) {
                     left_index++;
