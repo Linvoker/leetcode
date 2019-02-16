@@ -8,6 +8,7 @@
  */
 class Solution {
 public:
+    //这方法没有19_new.cpp的头结点法好
     ListNode* removeNthFromEnd(ListNode* head, int n) {
         ListNode *temp = head;
         int i = 0;
