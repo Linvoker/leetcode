@@ -6,7 +6,7 @@
 using namespace std;
 class Solution {
 public:
-    //动态规划的做法，时间复杂度按理说也是O(n)，但是却很耗时。用贪心算法比较靠谱(见55.cpp)
+    //动态规划的做法，时间复杂度是O(n^2)，很耗时。用贪心算法比较靠谱(见55.cpp)
     bool canJump(vector<int>& nums) {
         vector<int> table(nums.size(), -1);
         return backtrack(nums, 0, table);
