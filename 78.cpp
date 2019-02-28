@@ -1,4 +1,3 @@
-//看起来必须先排序
 //能通过剪枝函数的都能通过终止条件，终止条件只是将结果写入ret_vec，并不return，这点要注意
 //这题和以往的模式不一样，有点例外，但框架一样
 
@@ -6,7 +5,7 @@
 class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        std::sort(nums.begin(), nums.end());
+        //std::sort(nums.begin(), nums.end());
         vector<vector<int>> ret_vec;
         vector<int> trace;
         backTracking(ret_vec, trace, nums, 0);
