@@ -5,10 +5,17 @@
 #include<climits>
 
 using namespace std;
+#include<vector>
+#include<iostream>
+//#include<queue>
+#include<unordered_map>
+#include<climits>
+
+using namespace std;
 class Solution {
 public:
-        //投票法
-    int majorityElement(vector<int>& nums) {
+    //投票法
+    /*int majorityElement(vector<int>& nums) {
         int prev, cnt = 0;
         for (auto num : nums) {
             if (cnt == 0) {
@@ -21,8 +28,8 @@ public:
             }
         }
         return prev;
-    }
-    /*
+    }*/
+
     int majorityElement(vector<int>& nums) {
         //sort(nums.begin(), nums.end());
         //nth_element(nums.begin(), nums.begin() + nums.size() / 2, nums.end());
@@ -45,46 +52,71 @@ public:
             }
         }
     }
-    //这种快排在有大量重复元素时会升至O(n^2)，可以使用三路快排，把与pivot相等的元素丢到中间。
+    /*
+    //Lomuto
     int partition(vector<int>& nums, int beg, int end) {
         if (beg >= end) {
             return beg;
         }
-        int pivot = nums[beg];
-
-        while (beg < end) {
-            while (beg < end && nums[end] >= pivot) { //等于的时候不处理
-                end--;
+        int pivot = nums[end];
+        int i = beg;
+        for (int j = beg; j < end; j++) {
+            if (nums[j] < pivot) {
+                swap(nums[i], nums[j]);
+                i++;
             }
-            nums[beg] = nums[end];
-            //beg++;
-            while (beg < end && nums[beg] <= pivot) { //等于的时候不处理
-                beg++;
-            }
-            nums[end] = nums[beg];
-            //end--;
         }
-        nums[beg] = pivot;
-        return beg;
+        swap(nums[i], nums[end]);
+        return i;
     }
+    // pivot = 4
+    // 3,7,5,8,1,4
+    // ij
+    //   ij
+    //   i     j
+    //   <----->
+    // 3,1,5,8,7,4
+    //     i     j
+    //     <----->
+    // 3,1,4,8,7,5
     */
+    //Hoare
+    int partition(vector<int>& nums, int beg, int end) {
+        if (beg >= end) {
+            return beg;
+        }
+        int i = beg, j = end + 1; //遍历范围为beg+1 ~ end
+        int pivot = nums[i];
 
+        while (1) {
+            while (nums[++i] < pivot) {
+                if (i == end) break;
+            }
+            while (nums[--j] > pivot) {
+                if (j == beg) break;
+            }
 
+            if (i < j) {
+                swap(nums[i], nums[j]);
+            } else {
+                break;
+            }
+        }
+        swap(nums[j], nums[beg]);
+        return j;
+    }
     // pivot = 3
-    // 3,7,5,8,1,4 //先遍历j
-    // i         j // nums[j] >= pivot j--
-    // i       j   //nums[j] < pivot => 交换ij 接下来遍历i
-    // <--------
-    // 1,7,5,8,1,4
-      // i     j  //num[i] > pivot =>交换ij 接下来遍历j
-      // ------>
-    // 1,7,5,8,7,4
-      // i   j    // nums[j] >= pivot j--
-    // 1,7,5,8,7,4
-     // i(j)      //退出循环nums[i] = pivot
+    // 3,7,5,8,1,4
+    // i           j
+    //   i     j  //ij都递增递减到合适的位置
+    //   <----->
+    // 3,1,5,8,7,4
+    //   j i  //ij都递增递减到合适的位置
+    // <->
     // 1,3,5,8,7,4
 };
 int main () {
-    vector<int> data {-1,1,1,1,2,1};
+    //vector<int> data {-1,1,1,1,2,1};
+    vector<int> data {4,5,4};
     cout << (new Solution)->majorityElement(data) << endl;
 }
